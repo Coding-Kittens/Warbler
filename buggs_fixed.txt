@@ -1,0 +1,3 @@
+. user can no longer follow themselves
+. fixed the html that was showing up on the user card to unfollow a user
+. fixed delete_user by deleting their messages first

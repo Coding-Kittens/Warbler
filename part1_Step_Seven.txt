@@ -1,0 +1,8 @@
+How is the logged in user being kept track of?
+  Using session and Flask’s g object to store the user id in CURR_USER_KEY and storing the user in g.user
+What is Flask’s g object?
+  It is an object that is used to store data in application context.
+What is the purpose of add_user_to_g?
+  Before each request it stores the currently logged-in user in g.
+What does @app.before_request mean?
+  It means that the function will run before each request.
