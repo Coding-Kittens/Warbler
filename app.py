@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 from forms import UserAddForm, LoginForm, MessageForm, EditUserForm
-from models import db, connect_db, User, Message
+from models import db, connect_db, User, Message, Likes, Follows
 
 
 CURR_USER_KEY = "curr_user"
@@ -311,6 +311,44 @@ def messages_destroy(message_id):
     db.session.commit()
 
     return redirect(f"/users/{g.user.id}")
+
+
+##############################################################################
+# Likes
+
+
+@app.route("/users/like/<int:message_id>", methods=["POST"])
+def like_message(message_id):
+    """likes or unlikes a message"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    current_msg = Message.query.get_or_404(message_id)
+    if current_msg in g.user.likes:
+        g.user.likes.remove(current_msg)
+        db.session.add(g.user)
+        db.session.commit()
+        return redirect("/")
+
+    if g.user.id == current_msg.user_id:
+        flash("You can't like your own message.", "danger")
+        return redirect("/")
+
+    new_like = Likes(user_id=g.user.id, message_id=message_id)
+    db.session.add(new_like)
+    db.session.commit()
+
+    return redirect("/")
+
+
+@app.route("/users/<int:user_id>/likes", methods=["GET"])
+def show_liked_messages(user_id):
+    """shows likes page for a user"""
+    user = User.query.get_or_404(user_id)
+    messages = Message.query.all()
+    return render_template("users/likes.html", user=user, messages=messages)
 
 
 ##############################################################################

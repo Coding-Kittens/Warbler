@@ -103,6 +103,9 @@ nav form.navbar-form {
   border: 2px solid #007bff;
 }
 
+
+
+
 /* on "onboarding" pages (signup & login), the navbar is
    different: no search box, the logo is centered, and it has
    a background color.
@@ -523,6 +526,12 @@ p.card-bio {
 }
 
 /* ================================ 404 page */
+
+#error_img
+{
+  width: 700px;
+}
+
 
 .message-404 {
   color: white;
