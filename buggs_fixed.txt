@@ -1,3 +1,8 @@
 . user can no longer follow themselves
 . fixed the html that was showing up on the user card to unfollow a user
 . fixed delete_user by deleting their messages first
+. user can no longer delete another users message
+. changed User.query.get to  get_or_404 so that stop_following will return 404 if the follower you are trying to follow does not exist
+. changed User.query.get to  get_or_404 so that messages_destroy will return 404 if the message you are trying to delete does not exist
+. changed User.query.get to  get_or_404 so that messages_show will return 404 if the message does not exist
+. changed User.query.get to  get_or_404 so that add_user_to_g will return 404 if the user does not exist
