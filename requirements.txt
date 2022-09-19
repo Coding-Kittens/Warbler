@@ -27,7 +27,7 @@ Pygments==2.2.0
 python-dateutil==2.7.3
 simplegeneric==0.8.1
 six==1.11.0
-SQLAlchemy==1.2.12
+SQLAlchemy==1.4.41
 text-unidecode==1.2
 traitlets==4.3.2
 wcwidth==0.1.7
